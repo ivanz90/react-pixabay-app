@@ -11,7 +11,7 @@ const InfinityScroll = ({ children }) => {
 
   const fetchMoreItems = React.useCallback(
     (params, p) => {
-      p > prevPage.current && dispatch(searchOperations.fetchMore(params, p))
+      p !== prevPage.current && dispatch(searchOperations.fetchMore(params, p))
     },
     [dispatch]
   )
@@ -35,7 +35,7 @@ const InfinityScroll = ({ children }) => {
     }
     return
   }
-
+  console.log('Render infinity sroll')
   return <>{children}</>
 }
 

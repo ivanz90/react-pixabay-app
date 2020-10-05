@@ -1,5 +1,6 @@
 import actions from './actions'
 import { callApi } from '../../../shared/apiCall'
+import { batch } from 'react-redux'
 
 const setPage = actions.setPage
 
@@ -21,15 +22,14 @@ const fetchMore = (params, page) => async (dispatch) => {
   dispatch(actions.submitPending(true))
   try {
     const data = await callApi(params)
-    dispatch(actions.updateHits(data))
-    dispatch(actions.setPage(page + 1))
-    setTimeout(() => {
+    batch(() => {
+      dispatch(actions.updateHits(data))
+      dispatch(actions.setPage(page + 1))
       dispatch(actions.submitPending(false))
-    }, 1000)
+    })
+    
   } catch (err) {
-    setTimeout(() => {
-      dispatch(actions.submitPending(false))
-    }, 1000)
+    dispatch(actions.submitPending(false))
     return err
   }
   return 'done'
