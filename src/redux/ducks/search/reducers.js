@@ -2,6 +2,7 @@ import types from './types'
 
 const initialState = {
   searchPending: false,
+  loadMorePending: false,
   total: 0,
   totalHits: 0,
   hits: [],
@@ -20,6 +21,11 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchPending: action.payload
+      }
+    case types.LOAD_MORE_PENDING: 
+      return {
+        ...state,
+        loadMorePending: action.payload
       }
     case types.SET_PAGE: 
       return {

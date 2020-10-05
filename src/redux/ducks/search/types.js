@@ -2,6 +2,7 @@ const SUBMIT_SEARCH = 'search/SUBMIT_SEARCH',
       SUBMIT_SUCCESS = 'search/SUBMIT_SUCCESS',
       SUBMIT_ERROR = 'search/SUBMIT_ERROR',
       SUBMIT_PENDING = 'search/SUBMIT_PENDING',
+      LOAD_MORE_PENDING = 'search/LOAD_MORE_PENDING',
       SET_PAGE = 'search/SET_PAGE',
       UPDATE_HITS = 'search/UPDATE_HITS',
       UPDATE_PAGE = 'search/UPDATE_PAGE'
@@ -13,5 +14,6 @@ export default {
   SUBMIT_PENDING,
   SET_PAGE,
   UPDATE_PAGE,
-  UPDATE_HITS
+  UPDATE_HITS,
+  LOAD_MORE_PENDING
 }

@@ -1,13 +1,12 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { searchOperations, searchSelectors } from '../../redux/ducks/search'
 
 const InfinityScroll = ({ children }) => {
-  const page = useSelector((state) => searchSelectors.selectPage(state))
-  const isPending = useSelector(state => searchSelectors.selectIsPending(state))
+  
   const prevPage = React.useRef(null)
-
   const dispatch = useDispatch()
+  const { page, isLoading } =  useSelector(state => searchSelectors.selectInfinityScrollSettings(state), shallowEqual)
 
   const fetchMoreItems = React.useCallback(
     (params, p) => {
@@ -19,7 +18,7 @@ const InfinityScroll = ({ children }) => {
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [page, isPending])
+  }, [page, isLoading])
 
   React.useEffect(() => { 
     prevPage.current = page - 1
@@ -31,11 +30,11 @@ const InfinityScroll = ({ children }) => {
 
     if (((scrollHeight - 300) >= scrollPos) / scrollHeight == 0) {
       const params = window.location.search[0] === '?' ? window.location.search.slice(1) : window.location.search
-      !isPending && fetchMoreItems(params, page)
+      !isLoading && fetchMoreItems(params, page)
     }
     return
   }
-  console.log('Render infinity sroll')
+ 
   return <>{children}</>
 }
 

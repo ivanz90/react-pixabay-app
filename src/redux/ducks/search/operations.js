@@ -4,9 +4,9 @@ import { batch } from 'react-redux'
 
 const setPage = actions.setPage
 
-const submitSearch = (params) => async (dispatch) => {
+const submitSearch = (params) => async (dispatch, getState) => {
   dispatch(actions.submitPending(true))
-  dispatch(actions.setPage(2))
+  if (getState().search.page > 2) dispatch(actions.setPage(2))
   try {
     const data = await callApi(params)
     dispatch(actions.submitSuccess(data))
@@ -19,17 +19,17 @@ const submitSearch = (params) => async (dispatch) => {
 
 const fetchMore = (params, page) => async (dispatch) => {
   params = params ? `${params}&page=${page}` : `${params}page=${page}`
-  dispatch(actions.submitPending(true))
+  dispatch(actions.loadMorePending(true))
   try {
     const data = await callApi(params)
     batch(() => {
       dispatch(actions.updateHits(data))
       dispatch(actions.setPage(page + 1))
-      dispatch(actions.submitPending(false))
+      dispatch(actions.loadMorePending(false))
     })
     
   } catch (err) {
-    dispatch(actions.submitPending(false))
+    dispatch(actions.loadMorePending(false))
     return err
   }
   return 'done'

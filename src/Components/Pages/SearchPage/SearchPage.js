@@ -11,7 +11,7 @@ import { SearchSection } from './styles'
 const SearchPage = () => {
   const query = useQuery()
   const dispatch = useDispatch()
-  console.log('Render SearchPage')
+
   const fetchData = useCallback(
     (data) => {
       dispatch(searchOperations.submitSearch(data))
