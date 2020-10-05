@@ -3,20 +3,20 @@ import React from 'react'
 const DEFAULT_COLUMNS = 2,
   DEFAULT_GUTTER = 14
 
-const selectFromArray = (arr, step, acc = []) => {
+const splitByChunks = (arr, step, acc = []) => {
   if (arr.length && step >= 0) {
     let selected = arr.filter((_, index) => index % step === 0)
     acc.push(selected)
     let newArr = arr.filter((_, index) => index % step !== 0)
     step -= 1
-    selectFromArray(newArr, step, acc)
+    splitByChunks(newArr, step, acc)
   }
 
   return acc
 }
 
 const renderItems = (items, columnCount, gutter) => {
-  const childrenArray = selectFromArray(React.Children.toArray(items), columnCount)
+  const childrenArray = splitByChunks(React.Children.toArray(items), columnCount)
 
   return (
     <>
