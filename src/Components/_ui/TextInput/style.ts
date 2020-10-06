@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import { TextInputProps } from './../../../shared/interfaces'
 import { INPUT_BORDER_DEFAULT, TEXT_COLOR, INPUT_BORDER_FOCUS } from '../../../shared/style'
 
-
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<TextInputProps>`
   font-size: 16px;
   display: block;
   padding: 10px 20px;
