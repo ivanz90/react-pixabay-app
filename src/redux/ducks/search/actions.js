@@ -24,6 +24,13 @@ const submitPending = (status) => {
   }
 }
 
+const loadMorePending = (status) => {
+  return {
+    type: types.LOAD_MORE_PENDING,
+    payload: status
+  }
+}
+
 const setPage = (n) => {
   return {
     type: types.SET_PAGE,
@@ -50,5 +57,6 @@ export default {
   submitPending,
   setPage,
   updatePage,
-  updateHits
+  updateHits,
+  loadMorePending
 }

@@ -3,7 +3,7 @@ import { useSelector, shallowEqual } from 'react-redux'
 import { searchSelectors } from '../../redux/ducks/search'
 import GalleryCard from './GalleryCard'
 import Masonry from './Masonry/Masonry'
-import { GalleryWrap, GallerySection, GalleryInner, GalleryItem } from './styles'
+import { GalleryWrap, GallerySection } from './styles'
 
 const breakpointColumnsObj = {
   default: 4,

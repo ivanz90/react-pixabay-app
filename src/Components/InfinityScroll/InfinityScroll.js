@@ -1,16 +1,16 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { searchOperations, searchSelectors } from '../../redux/ducks/search'
 
 const InfinityScroll = ({ children }) => {
-  const page = useSelector((state) => searchSelectors.selectPage(state))
-  const isPending = useSelector(state => searchSelectors.selectIsPending(state)) 
   
+  const prevPage = React.useRef(null)
   const dispatch = useDispatch()
+  const { page, isLoading } =  useSelector(state => searchSelectors.selectInfinityScrollSettings(state), shallowEqual)
 
   const fetchMoreItems = React.useCallback(
     (params, p) => {
-      dispatch(searchOperations.fetchMore(params, p))
+      p !== prevPage.current && dispatch(searchOperations.fetchMore(params, p))
     },
     [dispatch]
   )
@@ -18,7 +18,11 @@ const InfinityScroll = ({ children }) => {
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [page, isPending])
+  }, [page, isLoading])
+
+  React.useEffect(() => { 
+    prevPage.current = page - 1
+  }, [page])
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight
@@ -26,24 +30,11 @@ const InfinityScroll = ({ children }) => {
 
     if (((scrollHeight - 300) >= scrollPos) / scrollHeight == 0) {
       const params = window.location.search[0] === '?' ? window.location.search.slice(1) : window.location.search
-      !isPending && fetchMoreItems(params, page)
+      !isLoading && fetchMoreItems(params, page)
     }
     return
-    
-    // if (
-    //   window.innerHeight + document.documentElement.scrollTop <
-    //     document.documentElement.offsetHeight - 100 ||
-    //   window.innerHeight + document.documentElement.scrollTop >
-    //     document.documentElement.offsetHeight + 100
-    // )
-    //   return
-    // if ((scrollHeight - scrollPos) / scrollHeight == 0) return
-    // if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return
-    // const params =
-    //   window.location.search[0] === '?' ? window.location.search.slice(1) : window.location.search
-    // fetchMoreItems(params, page)
   }
-
+ 
   return <>{children}</>
 }
 

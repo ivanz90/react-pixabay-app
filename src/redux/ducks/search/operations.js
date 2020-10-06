@@ -1,11 +1,12 @@
 import actions from './actions'
 import { callApi } from '../../../shared/apiCall'
+import { batch } from 'react-redux'
 
 const setPage = actions.setPage
 
-const submitSearch = (params) => async (dispatch) => {
+const submitSearch = (params) => async (dispatch, getState) => {
   dispatch(actions.submitPending(true))
-  dispatch(actions.setPage(2))
+  if (getState().search.page > 2) dispatch(actions.setPage(2))
   try {
     const data = await callApi(params)
     dispatch(actions.submitSuccess(data))
@@ -18,18 +19,17 @@ const submitSearch = (params) => async (dispatch) => {
 
 const fetchMore = (params, page) => async (dispatch) => {
   params = params ? `${params}&page=${page}` : `${params}page=${page}`
-  dispatch(actions.submitPending(true))
+  dispatch(actions.loadMorePending(true))
   try {
     const data = await callApi(params)
-    dispatch(actions.updateHits(data))
-    dispatch(actions.setPage(page + 1))
-    setTimeout(() => {
-      dispatch(actions.submitPending(false))
-    }, 1000)
+    batch(() => {
+      dispatch(actions.updateHits(data))
+      dispatch(actions.setPage(page + 1))
+      dispatch(actions.loadMorePending(false))
+    })
+    
   } catch (err) {
-    setTimeout(() => {
-      dispatch(actions.submitPending(false))
-    }, 1000)
+    dispatch(actions.loadMorePending(false))
     return err
   }
   return 'done'
