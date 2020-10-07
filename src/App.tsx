@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import SearchPage from './Components/Pages/SearchPage'
 import Init from './Components/Init'
 
-function App() {
+const App: React.FC<React.ReactNode> = () => {
   return (
     <Router>
       <Init>
