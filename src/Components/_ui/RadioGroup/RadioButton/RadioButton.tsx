@@ -1,7 +1,12 @@
 import React from 'react'
 import { RadioName, RadioInput } from './styles'
 
-const RadioButton = React.forwardRef((props, ref) => {
+type radio = {
+  value: string
+  label: string
+}
+
+const RadioButton = React.forwardRef<HTMLInputElement, radio>((props, ref) => {
   return (
     <>
       <RadioInput ref={ref} {...props} />
