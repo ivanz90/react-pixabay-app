@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import SearchPage from './Components/Pages/SearchPage'
-import Init from './Components/Init'
+import SearchPage from './components/Pages/SearchPage'
+import Init from './components/Init'
 
 const App: React.FC<React.ReactNode> = () => {
   return (
