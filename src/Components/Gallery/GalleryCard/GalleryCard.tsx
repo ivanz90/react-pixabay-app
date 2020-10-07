@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardImg } from './styles'
 
-const GalleryCard = ({ webformatURL, previewURL }) => {
+const GalleryCard: React.FC<{ webformatURL: string }> = ({ webformatURL }) => {
   return ( 
     <Card>
       <div>
