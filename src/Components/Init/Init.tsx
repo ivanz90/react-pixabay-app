@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import AppPreloader from '../AppPreloader'
 
-const Init = ({ children }) => {
-  const [inited, setInited] = useState(false)
+const Init: React.FC<{children: React.ReactNode}> = ({ children }) => {
+  const [inited, setInited] = React.useState<boolean>(false)
   
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setTimeout(() => {
       setInited(true)
     }, 1000)
