@@ -3,7 +3,7 @@ import { default as ReactSelect } from 'react-select'
 import { customStyles } from './styles'
 import { FieldTitle } from '../_shared-styles'
 
-const Select = ({title, ...restProps}) => {
+const Select: React.FC<{title: string}> = ({title, ...restProps}) => {
     return (
       <label>
         {!!title && <FieldTitle>{title}</FieldTitle>}

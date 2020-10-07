@@ -1,6 +1,7 @@
 import { INPUT_BORDER_DEFAULT, INPUT_BORDER_FOCUS, TEXT_COLOR, BLACK_PRIMARY } from '../../../shared/style'
+import { Styles } from 'react-select'
 
-export const customStyles = {
+export const customStyles: Styles = {
   container: (provided) => ({
       ...provided,
       width: '237px'
