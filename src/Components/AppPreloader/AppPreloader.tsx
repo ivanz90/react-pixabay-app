@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppLoader, Spinner, SpinnerBox } from './styles'
 
-const AppPreloader = () => {
+const AppPreloader: React.FC = () => {
   return (
     <AppLoader>
       <SpinnerBox>
