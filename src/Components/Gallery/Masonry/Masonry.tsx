@@ -1,13 +1,28 @@
 import React from 'react'
 
-const DEFAULT_COLUMNS = 2,
-  DEFAULT_GUTTER = 14
+interface IBreakPoints {
+  default: number;
+  [key: number]: number;
+}
 
-const splitByChunks = (arr, step, acc = []) => {
+interface IMasonry {
+  breakpointCols: IBreakPoints | number; 
+  gutter: number; 
+  children: React.ReactNode[];
+}
+
+type TColumnCount = {
+  current: number
+}
+
+const DEFAULT_COLUMNS: number = 2,
+  DEFAULT_GUTTER: number = 14
+
+const splitByChunks = (arr: any[], step: number, acc: object[] = []) => {
   if (arr.length && step >= 0) {
-    let selected = arr.filter((_, index) => index % step === 0)
+    let selected: any[] = arr.filter((_, index) => index % step === 0)
     acc.push(selected)
-    let newArr = arr.filter((_, index) => index % step !== 0)
+    let newArr: any[] = arr.filter((_, index) => index % step !== 0)
     step -= 1
     splitByChunks(newArr, step, acc)
   }
@@ -15,8 +30,8 @@ const splitByChunks = (arr, step, acc = []) => {
   return acc
 }
 
-const renderItems = (items, columnCount, gutter) => {
-  const childrenArray = splitByChunks(React.Children.toArray(items), columnCount)
+const renderItems = (items: any[], columnCount: number, gutter: number) => {
+  const childrenArray: any[] = splitByChunks(React.Children.toArray(items), columnCount)
 
   return (
     <>
@@ -24,7 +39,7 @@ const renderItems = (items, columnCount, gutter) => {
         {childrenArray.map((column, i) => {
           return (
             <div key={i} style={{ margin: gutter ? gutter / 2 : DEFAULT_GUTTER / 2 }}>
-              {column.map((child, index) => {
+              {column.map((child: any, index: number) => {
                 return (
                   <div key={child.key} style={{ marginTop: index === 0 ? '' : `${gutter}px` }}>
                     {child}
@@ -39,24 +54,27 @@ const renderItems = (items, columnCount, gutter) => {
   )
 }
 
-const Masonry = ({ items, breakpointCols, gutter, children }) => {
-  const columnCountRef = React.useRef()
-  const lastRecalculateAnimationFrame = React.useRef(null)
+const Masonry: React.FC<IMasonry> = ({ breakpointCols, gutter, children }) => {
+  const columnCountRef: TColumnCount = React.useRef(0)
+  const lastRecalculateAnimationFrame: {current: any} = React.useRef(null)
 
-  if (breakpointCols && breakpointCols.default) {
+  if (typeof breakpointCols === 'object' && breakpointCols && breakpointCols.default) {
     columnCountRef.current = breakpointCols.default
-  } else {
-    columnCountRef.current = parseInt(breakpointCols) || DEFAULT_COLUMNS
+  } else if (typeof breakpointCols === 'number') {
+    columnCountRef.current = breakpointCols || DEFAULT_COLUMNS
   }
 
   const reCalculateColumnCount = () => {
     const windowWidth = (window && window.innerWidth) || Infinity
+    
     let breakpointColsObject = breakpointCols
+    
     if (typeof breakpointColsObject !== 'object') {
       breakpointColsObject = {
-        default: parseInt(breakpointColsObject) || DEFAULT_COLUMNS
+        default: breakpointColsObject || DEFAULT_COLUMNS
       }
     }
+    
     let matchedBreakpoint = Infinity
     let columns = breakpointColsObject.default || DEFAULT_COLUMNS
 
@@ -70,7 +88,7 @@ const Masonry = ({ items, breakpointCols, gutter, children }) => {
       }
     }
 
-    columns = Math.max(1, parseInt(columns) || 1)
+    columns = Math.max(1, columns || 1)
 
     if (columnCount !== columns) {
       setColumnCount(columns)
@@ -102,11 +120,12 @@ const Masonry = ({ items, breakpointCols, gutter, children }) => {
     return () => window.removeEventListener('resize', reCalculateColumnCountDebounce)
   }, [])
 
-  // Component did update
+  // Component did update (need optimize)
 
-  React.useEffect(() => {
-    reCalculateColumnCount()
-  }, [JSON.stringify(items)])
+  // React.useEffect(() => {
+  //   console.log('update')
+  //   reCalculateColumnCount()
+  // }, [children])
 
   return <>{renderItems(children, columnCount, gutter)}</>
 }
