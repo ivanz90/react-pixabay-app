@@ -3,13 +3,33 @@ import { default as ReactSelect } from 'react-select'
 import { customStyles } from './styles'
 import { FieldTitle } from '../_shared-styles'
 
-const Select: React.FC<{title: string}> = ({title, ...restProps}) => {
-    return (
-      <label>
-        {!!title && <FieldTitle>{title}</FieldTitle>}
-        <ReactSelect isSearchable={false} styles={customStyles} {...restProps} />
-      </label>
-    )
+type SelectOption = {
+  id?: number
+  value: string
+  label: string
 }
 
-export default  Select
+interface ISelect {
+  title?: string;
+  options: SelectOption[] | undefined;
+  defaultValue: SelectOption;
+  onBlur: any;
+  onChange: any;
+}
+
+const Select: React.FC<ISelect> = ({ title, options, defaultValue, ...restProps }) => {
+  return (
+    <label>
+      {!!title && <FieldTitle>{title}</FieldTitle>}
+      <ReactSelect
+        isSearchable={false}
+        styles={customStyles}
+        options={options}
+        defaultValue={defaultValue}
+        {...restProps}
+      />
+    </label>
+  )
+}
+
+export default Select

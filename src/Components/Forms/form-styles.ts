@@ -3,7 +3,7 @@ import { INPUT_BORDER_DEFAULT } from '../../shared/style'
 
 // Form layout
 
-export const FormRow = styled.div.attrs((props) => ({
+export const FormRow = styled.div.attrs((props: any) => ({
   display: props.display || '',
   alignItems: props.display ? 'flex-end' : ''
 }))`
@@ -18,7 +18,7 @@ export const FormRow = styled.div.attrs((props) => ({
   }
 `
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.div<{borderColor: string}>`
   display: inline-block;
   padding: 1rem;
   border: 1px solid;

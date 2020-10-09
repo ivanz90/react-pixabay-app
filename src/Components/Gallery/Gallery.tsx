@@ -18,7 +18,7 @@ interface IHit {
   webformatURL: string;
 }
 
-const Gallery = () => {
+const Gallery: React.FC = () => {
   const hits: IHit[] = useSelector((state) => searchSelectors.selectHits(state), shallowEqual)
 
   return (

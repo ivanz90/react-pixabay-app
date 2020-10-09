@@ -28,7 +28,7 @@ const SearchPage = () => {
       <SearchSection>
         <Container>
           <Search fetchData={fetchData}  />
-          <InfinityScroll query={query}>
+          <InfinityScroll>
             <Gallery />
           </InfinityScroll>
         </Container>

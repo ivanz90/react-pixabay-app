@@ -1,4 +1,32 @@
-const schema = {
+export type option = {
+  id?: number
+  value: string
+  label: string
+}
+
+export interface IInput {
+  id: number;
+  name: string;
+  type?: string;
+  element: string;
+  validators?: {};
+  options?: option[];
+  title?: string;  
+}
+
+interface IButton {
+  id: number;
+  type: string;
+  code: string;
+  title: string;
+}
+
+interface ISchema {
+  inputs: IInput[];
+  buttons: IButton[];
+}
+
+const schema: ISchema = {
   inputs: [
     {
       id: 1,
