@@ -8,7 +8,7 @@ import { searchOperations } from '../../../redux/ducks/search'
 import { Container } from '../../../shared/style'
 import { SearchSection } from './styles'
 
-const SearchPage = () => {
+const SearchPage: React.FC = () => {
   const query = useQuery()
   const dispatch = useDispatch()
 
@@ -24,16 +24,14 @@ const SearchPage = () => {
   }, [query, fetchData])
 
   return (
-    <>
-      <SearchSection>
-        <Container>
-          <Search fetchData={fetchData}  />
-          <InfinityScroll>
-            <Gallery />
-          </InfinityScroll>
-        </Container>
-      </SearchSection>
-    </>
+    <SearchSection>
+      <Container>
+        <Search />
+        <InfinityScroll>
+          <Gallery />
+        </InfinityScroll>
+      </Container>
+    </SearchSection>
   )
 }
 
