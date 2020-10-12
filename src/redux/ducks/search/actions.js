@@ -1,8 +1,8 @@
-import types from './types'
+import constants from './constants'
 
 const submitSuccess = (data) => {
   return {
-    type: types.SUBMIT_SUCCESS,
+    type: constants.SUBMIT_SUCCESS,
     payload: {
       ...data,
       searchPending: false
@@ -12,41 +12,41 @@ const submitSuccess = (data) => {
 
 const submitError = (error) => {
   return {
-    type: types.SUBMIT_ERROR,
+    type: constants.SUBMIT_ERROR,
     payload: error
   }
 }
 
 const submitPending = (status) => {
   return {
-    type: types.SUBMIT_PENDING,
+    type: constants.SUBMIT_PENDING,
     payload: status
   }
 }
 
 const loadMorePending = (status) => {
   return {
-    type: types.LOAD_MORE_PENDING,
+    type: constants.LOAD_MORE_PENDING,
     payload: status
   }
 }
 
 const setPage = (n) => {
   return {
-    type: types.SET_PAGE,
+    type: constants.SET_PAGE,
     payload: n
   }
 }
 
 const updatePage = () => {
   return {
-    type: types.UPDATE_PAGE
+    type: constants.UPDATE_PAGE
   }
 }
 
 const updateHits = (data) => {
   return {
-    type: types.UPDATE_HITS,
+    type: constants.UPDATE_HITS,
     payload: data.hits
   }
 }

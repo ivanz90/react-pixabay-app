@@ -1,4 +1,4 @@
-import types from './types'
+import constants from './constants'
 
 const initialState = {
   searchPending: false,
@@ -12,27 +12,27 @@ const initialState = {
 
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SUBMIT_SUCCESS:
+    case constants.SUBMIT_SUCCESS:
       return {
         ...state,
         ...action.payload
       }
-    case types.SUBMIT_PENDING:
+    case constants.SUBMIT_PENDING:
       return {
         ...state,
         searchPending: action.payload
       }
-    case types.LOAD_MORE_PENDING: 
+    case constants.LOAD_MORE_PENDING: 
       return {
         ...state,
         loadMorePending: action.payload
       }
-    case types.SET_PAGE: 
+    case constants.SET_PAGE: 
       return {
         ...state,
         page: action.payload
       }
-    case types.UPDATE_HITS:
+    case constants.UPDATE_HITS:
       return {
         ...state,
         hits: [
@@ -40,7 +40,7 @@ const searchReducer = (state = initialState, action) => {
           ...action.payload
         ]
       }
-    case types.UPDATE_PAGE:
+    case constants.UPDATE_PAGE:
       return {
         ...state,
         page: state.page + 1

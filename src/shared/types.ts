@@ -8,3 +8,10 @@ export type TParamsObj = {
   category: string
   image_type: string | TSelectValue
 }
+
+
+export interface IHit {
+  id: number;
+  pageUrl: string;
+  webformatURL: string;
+}

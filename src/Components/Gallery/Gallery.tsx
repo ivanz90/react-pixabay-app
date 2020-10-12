@@ -1,9 +1,11 @@
 import React from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
+import { IHit } from '../../shared/types'
 import { searchSelectors } from '../../redux/ducks/search'
 import GalleryCard from './GalleryCard'
 import Masonry from './Masonry/Masonry'
 import { GalleryWrap, GallerySection } from './styles'
+
 
 const breakpointColumnsObj = {
   default: 4,
@@ -12,11 +14,6 @@ const breakpointColumnsObj = {
   500: 1
 }
 
-interface IHit {
-  id: number;
-  pageUrl: string;
-  webformatURL: string;
-}
 
 const Gallery: React.FC = () => {
   const hits: IHit[] = useSelector((state) => searchSelectors.selectHits(state), shallowEqual)
