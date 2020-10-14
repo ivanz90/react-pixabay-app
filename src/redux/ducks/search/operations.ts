@@ -1,10 +1,11 @@
 import actions from './actions'
 import { callApi } from '../../../shared/apiCall'
 import { batch } from 'react-redux'
+import { Dispatch } from 'redux'
 
 const setPage = actions.setPage
 
-const submitSearch = (params) => async (dispatch, getState) => {
+const submitSearch = (params: string) => async (dispatch: Dispatch, getState: Function) => {
   dispatch(actions.submitPending(true))
   if (getState().search.page > 2) dispatch(actions.setPage(2))
   try {
@@ -17,7 +18,7 @@ const submitSearch = (params) => async (dispatch, getState) => {
   }
 }
 
-const fetchMore = (params, page) => async (dispatch) => {
+const fetchMore = (params: string, page: number) => async (dispatch: Dispatch) => {
   params = params ? `${params}&page=${page}` : `${params}page=${page}`
   dispatch(actions.loadMorePending(true))
   try {
