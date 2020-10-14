@@ -11,11 +11,18 @@ export interface ISearchState {
   page: number 
 }
 
+export interface IResults {
+  hits: IHit[]
+  total: number
+  totalHits: number
+}
+
 export interface ISubmitSuccess {
   type: typeof constants.SUBMIT_SUCCESS
   payload: {
-    searchPending: boolean,
-    hits: IHit[],
+    searchPending: boolean
+    total: number
+    hits: IHit[]
     totalHits: number
   }
 }
@@ -42,7 +49,6 @@ export interface ISetPage {
 
 export interface IUpdatePage {
   type: typeof constants.UPDATE_PAGE
-  payload: number
 }
 
 export interface IUpdateHits {
