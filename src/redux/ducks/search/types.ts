@@ -1,6 +1,10 @@
 import constants from "./constants"
 import { IHit } from './../../../shared/types'
 
+export interface IRootState {
+  search: ISearchState
+}
+
 export interface ISearchState {
   searchPending: boolean
   loadMorePending: boolean

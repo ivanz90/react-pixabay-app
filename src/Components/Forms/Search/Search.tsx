@@ -9,6 +9,7 @@ import TextInput from '../../_ui/TextInput'
 import RadioGroup from '../../_ui/RadioGroup'
 import Select from '../../_ui/Select'
 import { FormWrapper, FormRow } from '../form-styles'
+import { IRootState } from '../../../redux/ducks/search/types'
 
 type FormData = {
   q: string
@@ -23,7 +24,7 @@ type FormElement = {
 const Search: React.FC = () => {
   const { inputs } = schema
   
-  const isSubmitting = useSelector((state) => searchSelectors.selectIsPending(state))
+  const isSubmitting = useSelector((state: IRootState) => searchSelectors.selectIsPending(state))
 
   const formRef = React.useRef<HTMLFormElement>(null)
 

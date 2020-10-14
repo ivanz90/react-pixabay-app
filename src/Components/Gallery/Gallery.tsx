@@ -5,6 +5,7 @@ import { searchSelectors } from '../../redux/ducks/search'
 import GalleryCard from './GalleryCard'
 import Masonry from './Masonry/Masonry'
 import { GalleryWrap, GallerySection } from './styles'
+import { IRootState } from '../../redux/ducks/search/types'
 
 
 const breakpointColumnsObj = {
@@ -16,7 +17,7 @@ const breakpointColumnsObj = {
 
 
 const Gallery: React.FC = () => {
-  const hits: IHit[] = useSelector((state) => searchSelectors.selectHits(state), shallowEqual)
+  const hits: IHit[] = useSelector((state: IRootState) => searchSelectors.selectHits(state), shallowEqual)
 
   return (
     <GallerySection>

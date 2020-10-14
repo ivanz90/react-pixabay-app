@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { searchOperations, searchSelectors } from '../../redux/ducks/search'
+import { IRootState } from '../../redux/ducks/search/types'
 
 type TPrevPage = {
   current: number | null
@@ -10,7 +11,7 @@ const InfinityScroll: React.FC<{children: React.ReactNode}> = ({ children }) => 
   
   const prevPage: TPrevPage = React.useRef(null)
   const dispatch = useDispatch()
-  const { page, isLoading } =  useSelector(state => searchSelectors.selectInfinityScrollSettings(state), shallowEqual)
+  const { page, isLoading } =  useSelector((state: IRootState) => searchSelectors.selectInfinityScrollSettings(state), shallowEqual)
 
   const fetchMoreItems = React.useCallback(
     (params: string, p: number) => {
