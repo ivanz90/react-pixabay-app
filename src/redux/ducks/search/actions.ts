@@ -3,14 +3,14 @@ import {
   ISubmitPending,
   ILoadMorePending,
   ISetPage,
-  IUpdatePage,
   IResults,
   ISubmitSuccess,
-  IUpdateHits
+  IUpdateHits,
+  TSearchActions
 } from './types'
 import constants from './constants'
 
-const submitSuccess = (data: IResults): ISubmitSuccess => {
+const submitSuccess = (data: IResults): TSearchActions => {
   return {
     type: constants.SUBMIT_SUCCESS,
     payload: {
@@ -20,21 +20,21 @@ const submitSuccess = (data: IResults): ISubmitSuccess => {
   }
 }
 
-const submitError = (error: string): ISubmitError => {
+const submitError = (error: string): TSearchActions => {
   return {
     type: constants.SUBMIT_ERROR,
     payload: error
   }
 }
 
-const submitPending = (status: boolean): ISubmitPending => {
+const submitPending = (status: boolean): TSearchActions => {
   return {
     type: constants.SUBMIT_PENDING,
     payload: status
   }
 }
 
-const loadMorePending = (status: boolean): ILoadMorePending => {
+const loadMorePending = (status: boolean): TSearchActions => {
   return {
     type: constants.LOAD_MORE_PENDING,
     payload: status
@@ -48,25 +48,20 @@ const setPage = (n: number): ISetPage => {
   }
 }
 
-const updatePage = (): IUpdatePage => {
-  return {
-    type: constants.UPDATE_PAGE
-  }
-}
-
-const updateHits = (data: IResults): IUpdateHits => {
+const updateHits = (data: IResults): TSearchActions => {
   return {
     type: constants.UPDATE_HITS,
     payload: data.hits
   }
 }
 
+
+
 export default {
   submitSuccess,
   submitError,
   submitPending,
   setPage,
-  updatePage,
   updateHits,
   loadMorePending
 }

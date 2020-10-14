@@ -47,12 +47,9 @@ export interface ISetPage {
   payload: number
 }
 
-export interface IUpdatePage {
-  type: typeof constants.UPDATE_PAGE
-}
-
 export interface IUpdateHits {
   type: typeof constants.UPDATE_HITS,
   payload: IHit[]
 }
 
+export type TSearchActions = ISubmitSuccess | ISubmitError | ISubmitPending | ILoadMorePending | ISetPage | IUpdateHits
