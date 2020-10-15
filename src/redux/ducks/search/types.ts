@@ -1,4 +1,4 @@
-import constants from "./constants"
+import constants from './constants'
 import { IHit } from './../../../shared/types'
 
 export interface IRootState {
@@ -12,7 +12,7 @@ export interface ISearchState {
   totalHits?: number
   hits: IHit[]
   error?: null | string
-  page: number 
+  page: number
 }
 
 export interface IResults {
@@ -21,14 +21,16 @@ export interface IResults {
   totalHits: number
 }
 
+export interface ISuccess {
+  searchPending: boolean
+  total: number
+  hits: IHit[]
+  totalHits: number
+}
+
 export interface ISubmitSuccess {
   type: typeof constants.SUBMIT_SUCCESS
-  payload: {
-    searchPending: boolean
-    total: number
-    hits: IHit[]
-    totalHits: number
-  }
+  payload: ISuccess
 }
 
 export interface ISubmitError {
@@ -52,8 +54,14 @@ export interface ISetPage {
 }
 
 export interface IUpdateHits {
-  type: typeof constants.UPDATE_HITS,
+  type: typeof constants.UPDATE_HITS
   payload: IHit[]
 }
 
-export type TSearchActions = ISubmitSuccess | ISubmitError | ISubmitPending | ILoadMorePending | ISetPage | IUpdateHits
+export type TSearchActions =
+  | ISubmitSuccess
+  | ISubmitError
+  | ISubmitPending
+  | ILoadMorePending
+  | ISetPage
+  | IUpdateHits

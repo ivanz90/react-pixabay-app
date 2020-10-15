@@ -1,13 +1,4 @@
-import {
-  ISubmitError,
-  ISubmitPending,
-  ILoadMorePending,
-  ISetPage,
-  IResults,
-  ISubmitSuccess,
-  IUpdateHits,
-  TSearchActions
-} from './types'
+import { ISetPage, IResults, TSearchActions } from './types'
 import constants from './constants'
 
 const submitSuccess = (data: IResults): TSearchActions => {
@@ -54,8 +45,6 @@ const updateHits = (data: IResults): TSearchActions => {
     payload: data.hits
   }
 }
-
-
 
 export default {
   submitSuccess,
