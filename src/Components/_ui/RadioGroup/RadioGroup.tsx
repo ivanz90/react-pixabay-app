@@ -4,13 +4,12 @@ import { RadioItem } from './style'
 import { FieldTitle } from '../_shared-styles'
 import { option } from '../../Forms/Search/schema'
 
-
 interface IRadioGroup {
-  options: option[] | undefined;
-  title?: string;
-  register?: any;
-  name: string;
-  onChange: any;
+  options: option[] | undefined
+  title?: string
+  register?: any /*Type is not provided by react-hook-form*/
+  name: string
+  onChange: () => void
 }
 
 const RadioGroup: React.FC<IRadioGroup> = ({ options, title, register, ...otherProps }) => {
@@ -21,7 +20,13 @@ const RadioGroup: React.FC<IRadioGroup> = ({ options, title, register, ...otherP
         options.map((option) => {
           return (
             <RadioItem key={option.id}>
-              <RadioButton key={option.id} {...otherProps} value={option.value} label={option.label} ref={register} />
+              <RadioButton
+                key={option.id}
+                {...otherProps}
+                value={option.value}
+                label={option.label}
+                ref={register}
+              />
             </RadioItem>
           )
         })}
