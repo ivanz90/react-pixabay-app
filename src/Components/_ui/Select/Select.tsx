@@ -13,8 +13,8 @@ interface ISelect {
   title?: string;
   options: SelectOption[] | undefined;
   defaultValue: SelectOption;
-  onBlur: any;
-  onChange: any;
+  onBlur?: () => void;
+  onChange?: (value: any) => void;
 }
 
 const Select: React.FC<ISelect> = ({ title, options, defaultValue, ...restProps }) => {
