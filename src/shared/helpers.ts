@@ -49,3 +49,15 @@ export const parseParams = (): TParamsObj => {
   
   return values
 }
+
+export const splitByChunks = <T>(arr: Array<T>, step: number, acc: Array<T[]> = []):Array<T[]> => {
+  if (arr.length && step >= 0) {
+    let selected: Array<T> = arr.filter((_, index) => index % step === 0)
+    acc.push(selected)
+    let newArr: Array<T> = arr.filter((_, index) => index % step !== 0)
+    step -= 1
+    splitByChunks(newArr, step, acc)
+  }
+
+  return acc
+}

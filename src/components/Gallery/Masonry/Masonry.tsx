@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { ReactChild } from 'react'
+import { splitByChunks } from '../../../shared/helpers'
 
 interface IBreakPoints {
   default: number;
@@ -11,6 +12,8 @@ interface IMasonry {
   children: React.ReactNode[];
 }
 
+
+
 type TColumnCount = {
   current: number
 }
@@ -18,21 +21,9 @@ type TColumnCount = {
 const DEFAULT_COLUMNS: number = 2,
   DEFAULT_GUTTER: number = 14
 
-const splitByChunks = (arr: any[], step: number, acc: object[] = []) => {
-  if (arr.length && step >= 0) {
-    let selected: any[] = arr.filter((_, index) => index % step === 0)
-    acc.push(selected)
-    let newArr: any[] = arr.filter((_, index) => index % step !== 0)
-    step -= 1
-    splitByChunks(newArr, step, acc)
-  }
-
-  return acc
-}
-
-const renderItems = (items: any[], columnCount: number, gutter: number) => {
-  const childrenArray: any[] = splitByChunks(React.Children.toArray(items), columnCount)
-
+const renderItems = (items: React.ReactNode, columnCount: number, gutter: number) => {
+  const childrenArray: Array<React.ReactNode[]> = splitByChunks(React.Children.toArray(items), columnCount)
+  
   return (
     <>
       <div style={{ display: 'flex', margin: `${-(gutter / 2)}px` }}>
