@@ -12,8 +12,6 @@ interface IMasonry {
   children: React.ReactNode[];
 }
 
-
-
 type TColumnCount = {
   current: number
 }
@@ -47,7 +45,7 @@ const renderItems = (items: React.ReactNode, columnCount: number, gutter: number
 
 const Masonry: React.FC<IMasonry> = ({ breakpointCols, gutter, children }) => {
   const columnCountRef: TColumnCount = React.useRef(0)
-  const lastRecalculateAnimationFrame: {current: any} = React.useRef(null)
+  const lastRecalculateAnimationFrame: {current?: number | null} = React.useRef(null)
 
   if (typeof breakpointCols === 'object' && breakpointCols && breakpointCols.default) {
     columnCountRef.current = breakpointCols.default
@@ -93,7 +91,7 @@ const Masonry: React.FC<IMasonry> = ({ breakpointCols, gutter, children }) => {
     }
 
     if (window.cancelAnimationFrame) {
-      window.cancelAnimationFrame(lastRecalculateAnimationFrame.current)
+      !!lastRecalculateAnimationFrame.current && window.cancelAnimationFrame(lastRecalculateAnimationFrame.current)
     }
 
     lastRecalculateAnimationFrame.current = window.requestAnimationFrame(() => {
