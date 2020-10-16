@@ -4,9 +4,9 @@ export type TSelectValue = {
 } 
 
 export type TParamsObj = {
-  q: string
-  category: string
-  image_type: string | TSelectValue
+  q?: string
+  category?: string
+  image_type?: string | TSelectValue
 }
 
 

@@ -38,13 +38,14 @@ export const formatParams = (params: TParamsObj | string | undefined ) => {
 
 export const parseParams = (): TParamsObj => {
   const url = new URL(window.location.href)
-  const values: any = {}
+  const values: TParamsObj = {}
   for (let p of url.searchParams) {
     Object.assign(values, {[p[0]]: p[1]})
   }
-  if (values.image_type) {
+
+  if (values.image_type && typeof values.image_type === 'string') {
     values.image_type = stringToSelectValue(values.image_type)
   }
- 
+  
   return values
 }

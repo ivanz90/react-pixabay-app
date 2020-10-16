@@ -1,5 +1,5 @@
 import React from 'react'
-import { default as ReactSelect, ValueType, OptionsType, OptionTypeBase } from 'react-select'
+import { default as ReactSelect, ValueType, OptionTypeBase } from 'react-select'
 import { customStyles } from './styles'
 import { FieldTitle } from '../_shared-styles'
 
@@ -25,8 +25,10 @@ const Select: React.FC<ISelect> = ({ title, options, defaultValue, ...restProps 
         isSearchable={false}
         styles={customStyles}
         options={options}
-        defaultValue={defaultValue}
+        value={defaultValue}
+        
         {...restProps}
+        defaultValue={defaultValue}
       />
     </label>
   )
