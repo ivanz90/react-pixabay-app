@@ -3,7 +3,7 @@ import { INPUT_BORDER_DEFAULT } from '../../shared/style'
 
 // Form layout
 
-export const FormRow = styled.div.attrs((props: any) => ({
+export const FormRow = styled.div.attrs((props: React.CSSProperties) => ({
   display: props.display || '',
   alignItems: props.display ? 'flex-end' : ''
 }))`
