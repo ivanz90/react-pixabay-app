@@ -1,5 +1,5 @@
 import React from 'react'
-import { default as ReactSelect } from 'react-select'
+import { default as ReactSelect, ValueType, OptionsType, OptionTypeBase } from 'react-select'
 import { customStyles } from './styles'
 import { FieldTitle } from '../_shared-styles'
 
@@ -14,7 +14,7 @@ interface ISelect {
   options: SelectOption[] | undefined;
   defaultValue: SelectOption;
   onBlur?: () => void;
-  onChange?: (value: any) => void;
+  onChange?: (value: ValueType<OptionTypeBase> | {value: string}) => void;
 }
 
 const Select: React.FC<ISelect> = ({ title, options, defaultValue, ...restProps }) => {

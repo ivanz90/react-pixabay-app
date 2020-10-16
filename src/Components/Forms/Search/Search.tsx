@@ -10,6 +10,7 @@ import RadioGroup from '../../_ui/RadioGroup'
 import Select from '../../_ui/Select'
 import { FormWrapper, FormRow } from '../form-styles'
 import { IRootState } from '../../../redux/ducks/search/types'
+import { OptionTypeBase, ValueType } from 'react-select'
 
 type FormData = {
   q: string
@@ -73,7 +74,7 @@ const Search: React.FC = () => {
                           title={input.title}
                           defaultValue={value}
                           onBlur={rest.onBlur}
-                          onChange={({ value }: any) => {
+                          onChange={(value : ValueType<OptionTypeBase> | {value: string}) => {
                             rest.onChange(value)
                             triggerSubmit(formRef.current)
                           }}
