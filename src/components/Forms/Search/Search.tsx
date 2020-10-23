@@ -66,7 +66,6 @@ const Search: React.FC = () => {
                     control={control}
                     name={input.name}
                     rules={{ ...input.validators }}
-                    defaultValue={input.options[0]}
                     render={({ value, ...rest }) => {
                       return (
                         <Select

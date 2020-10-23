@@ -11,8 +11,8 @@ type SelectOption = {
 
 interface ISelect {
   title?: string;
-  options: SelectOption[] | undefined;
-  defaultValue: SelectOption;
+  options?: SelectOption[];
+  defaultValue?: SelectOption;
   onBlur?: () => void;
   onChange?: (value: ValueType<OptionTypeBase> | {value: string}) => void;
 }
@@ -28,7 +28,7 @@ const Select: React.FC<ISelect> = ({ title, options, defaultValue, ...restProps 
         value={defaultValue}
         
         {...restProps}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue ? defaultValue : options?.length ? options[0] : null} 
       />
     </label>
   )
