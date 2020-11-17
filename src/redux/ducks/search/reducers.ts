@@ -1,6 +1,5 @@
 import constants from './constants'
-import { ISearchState, TSearchActions } from './types'
-import { Reducer } from 'redux'
+import { ISearchState, TAction } from './types'
 
 const initialState = {
   searchPending: false,
@@ -12,12 +11,12 @@ const initialState = {
   page: 2
 }
 
-const searchReducer: Reducer<ISearchState, TSearchActions> = (state = initialState, action) => {
+const searchReducer = (state: ISearchState = initialState, action: TAction) => {
   switch (action.type) {
     case constants.SUBMIT_SUCCESS:
       return {
         ...state,
-        ...(action.payload as any)
+        ...action.payload as {}
       }
     case constants.SUBMIT_PENDING:
       return {
